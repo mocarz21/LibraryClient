@@ -1,0 +1,17 @@
+@import '../../../settings.scss';
+
+.new-books-module{
+  
+  h1{
+    font-family: $font-title ;
+  }
+}
+@media(max-width: 768px){
+  .new-books-module{
+    .col-12{
+      display: flex;
+      align-items: center;
+    }
+    
+  }
+}

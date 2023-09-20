@@ -1,0 +1,46 @@
+.search-input-module{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px; 
+  padding-right: 15px;
+  .search-container{
+    position: relative;
+    width: 60%;
+    margin-bottom: 20px;
+
+    .search-input{
+      width: 100%;
+      padding-right: 80px;
+      height: 35px;
+      border-radius: 30px;
+      padding-left: 15px; 
+    }
+    .search-button{
+      position: absolute;
+      right: 1px;
+      top: 50%; 
+      transform: translateY(-50%);
+      border-radius: 30px;
+      width: 50px;
+      height: 35px;
+    }
+  }
+  .year{
+    width: 100%;
+  }
+}
+
+@media(max-width: 768px ) {
+  .search-input-module{
+    .search-filters{
+      text-align: left;
+      margin: 5px 0, 0, 0;
+      .year{
+        margin-bottom: 8px;
+        
+      }
+    }
+
+  }
+}

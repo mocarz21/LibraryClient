@@ -1,0 +1,27 @@
+@import '../../settings.scss';
+.navbar-module{
+  background-color: $primary-color;
+
+  .logo-box{
+    img{
+      object-fit: cover;
+      width: 250px;
+      height: 100px;
+    }
+  }
+
+  .item-box{
+    align-items: center;
+    justify-content: space-around;
+    a{
+      color: $white-color;
+      margin-right: 10px; 
+      font-family: $font-text;
+      text-decoration: dotted;
+    }
+  }
+  svg{
+    color: $white-color;
+  }
+
+}

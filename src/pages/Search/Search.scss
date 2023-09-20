@@ -1,0 +1,11 @@
+@import '../../settings.scss';
+
+.search-module{
+  h1, h4{
+    font-family: $font-title;
+    margin: 10px;
+  }
+  p{
+    font-family: $font-text ;
+  }
+}

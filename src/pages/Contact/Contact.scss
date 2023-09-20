@@ -1,0 +1,39 @@
+@import "../../settings.scss";
+
+.contact-module{
+  margin-top: 25px;
+  h1, h2, h3{
+    font-family: $font-title;
+  }
+  p{
+    font-family: $font-text;
+    
+  }
+  .info{
+    border-top: 2px solid black;
+    text-align: left;
+    padding-top: 15px;
+  }
+  .map{
+    margin:10px;
+  }
+  .responsive-map-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%; /* Proporcje 16:9, możesz je dostosować */
+  }
+
+  .responsive-map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .our-atribute{
+    margin-top: 20px;
+    svg{
+      color: orange
+    }
+  }
+}

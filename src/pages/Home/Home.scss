@@ -1,0 +1,11 @@
+@import '../../settings.scss';
+.home-module{
+  background-color: $second-color;
+  h1{
+    font-family: $font-title;
+    margin-top: 5px;
+    }
+  p{
+    font-family: $font-title;
+  }
+}
