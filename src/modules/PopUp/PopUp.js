@@ -8,7 +8,7 @@ export default function FormDialog(props) {
   return (
     <div>
       <Dialog open={props.open} onClose={props.onClose}>
-        <Login props={props}/>
+        <Login onClose={props.onClose}/>
       </Dialog>
     </div>
   );
