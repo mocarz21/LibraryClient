@@ -7,9 +7,6 @@ export const UserForm = ({isEditable, user}) => {
   if(!user){
     newUser = false
   }
-  console.log('newUser', newUser)
-  console.log('user', user)
-  console.log('isEditable', isEditable)
 
   return(
     <div className="container data-module">
