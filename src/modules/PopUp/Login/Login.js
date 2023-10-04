@@ -6,22 +6,30 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../hooks/ApiHooks/useUsers"
 
 export const Login = (props) =>{
 
+  const { logIn: logInHook } = useUser();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [validForm, setValidForm] = useState(true)
   
-
-  const whoLog = () =>{
-    if(email === 'user' && password === 'user'){
-      navigate('login/user')
-      props.onClose()
-    }
-    if(email === 'admin' && password === 'admin'){
-      navigate('login/employee')
-      props.onClose() 
+  const handleLogin = async event => {
+    event.preventDefault();
+    const output = await logInHook(login, password);
+      console.log('output.userData', output.userData)
+    if (output && output.status === "success") {
+      if(output.userData.cardNumber === undefined) {
+        navigate('login/employee')
+        props.onClose()
+      } else {
+        navigate('login/user')
+        props.onClose()
+      }
+    } else {
+      setValidForm(false);
     }
   }
 
@@ -29,22 +37,20 @@ export const Login = (props) =>{
     <>
       <DialogTitle>Zaloguj</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          W celu zalogowania podaj login i hasło 
-        </DialogContentText>
+        {validForm && <DialogContentText >W celu zalogowania podaj login i hasło</DialogContentText>}
+        {!validForm && <DialogContentText className='login-error'>Wprowadzono niepoprawne dane</DialogContentText>}
         <TextField
           autoFocus
           margin="dense"
           id="name"
           label="Login"
-          type="email"
+          type="text"
           fullWidth
           variant="standard"
-          value={email}
-          onChange={e=> setEmail( e.target.value )}
+          value={login}
+          onChange={e=> setLogin( e.target.value )}
         />
         <TextField
-          autoFocus
           margin="dense"
           id="password"
           label="Hasło"
@@ -56,7 +62,7 @@ export const Login = (props) =>{
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={whoLog}>Zaloguj</Button>
+        <Button onClick={handleLogin}>Zaloguj</Button>
       </DialogActions>
     </>
   )

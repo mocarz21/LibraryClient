@@ -19,7 +19,7 @@ export const Employee = () =>{
         <Route path="data" element = { <UserForm isEditable = { false }/> } />
         <Route path="findUser" element = { <UserSearch/> }/>
         <Route path="addBook" element = { <AddBook/> }/>
-        <Route path="addUser" element = { <UserForm isEditable = { true }/> }/>
+        <Route path="addUser" element = { <UserForm  newOrEdit ={'new'}/> }/>
       </Routes>
     </div>
   )

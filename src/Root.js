@@ -6,8 +6,15 @@ import { Account } from './pages/Account/Account'
 import { NavBar } from './modules/Navbar/NavBar'
 import { User } from './pages/User/User';
 import { Employee } from './pages/Employee/Employee'
-
+import { useUser } from "./hooks/ApiHooks/useUsers";
+import { useEffect } from "react";
 export const Root = () => {
+
+  const { isLoggedIn } = useUser();
+
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
   return(
     <>

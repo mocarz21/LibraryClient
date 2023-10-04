@@ -1,12 +1,69 @@
 import './UserForm.scss'
+import { useUser } from '../../hooks/ApiHooks/useUsers'
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import useSubmitForm from '../../hooks/ApiHooks/useSubmitForm';
 
-export const UserForm = ({isEditable, user}) => {
+export const UserForm = ({newOrEdit}) => {
 
-  let newUser = true
+  const { logOut, userData } = useUser();
+  const { handleSubmit } = useSubmitForm("/secure/employee/addUser");
 
-  if(!user){
-    newUser = false
+  const [ name , setName] = useState(userData.firstName)
+  const [ lastName , setLastName] = useState(userData.lastName)
+  const [ pesel , setPesel] = useState(userData.pesel)
+  const [ email , setEmail] = useState(userData.email)
+  const [ city , setCity] = useState(userData.city)
+  const [ streetName , setStreetName] = useState(userData.streetName)
+  const [ homeNr , setHomeNr] = useState( userData.homeNr )
+  const [ birthday , setBirthday] = useState(userData.birthday)
+  const [ cardNumber, setCardNumber] = useState(userData.cardNumber)
+
+  useEffect(() => {
+    if (newOrEdit && newOrEdit === 'new') {
+      setName('');
+      setLastName('');
+      setPesel('');
+      setEmail('');
+      setCity('');
+      setStreetName('');
+      setHomeNr('');
+      setBirthday('');
+      setCardNumber('')
+    }else{
+      setName(userData.firstName);
+      setLastName(userData.lastName);
+      setPesel(userData.pesel);
+      setEmail(userData.email);
+      setCity(userData.city);
+      setStreetName(userData.streetName);
+      setHomeNr(userData.homeNr);
+      setBirthday(userData.birthday);
+      setCardNumber(userData.cardNumber)
+    }
+  }, [newOrEdit, userData]);
+
+  const navigate = useNavigate();
+  const funLogOut=()=> {
+    logOut()
+    navigate('/')
   }
+  let newMember = true
+  let editMember = true
+
+  if(newOrEdit === 'edit'){
+    editMember = false
+  }if(newOrEdit === 'new'){
+    newMember = false
+    editMember = false
+  }
+  
+  const addPerson = async (e) =>{
+    e.preventDefault();
+    const userDataToSend = { name, lastName, pesel, email, city, streetName, homeNr, birthday, cardNumber };
+    await handleSubmit(e, userDataToSend); // przekaż dane do handleSubmit
+  };
+  
 
   return(
     <div className="container data-module">
@@ -23,7 +80,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Imię:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'imie'} readOnly={newUser}/>
+                <input type="text" onChange={e => setName(e.target.value)} value={name} readOnly={newMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -31,7 +88,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Nazwisko:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'nazwisko'} readOnly={newUser}/>
+                <input type="text" onChange={e => setLastName(e.target.value)} value={lastName} readOnly={newMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -39,7 +96,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Pesel:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'pesel'} readOnly={newUser}/>
+                <input type="text" onChange={e=> setPesel(e.target.value)}value={pesel} readOnly={newMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -47,7 +104,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>E-mail:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'e-mail'} readOnly={!isEditable}/>
+                <input type="text" onChange={e=> setEmail(e.target.value)} value={email} readOnly={editMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -55,7 +112,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Miasto:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'Miasto'} readOnly={!isEditable}/>
+                <input type="text" onChange={e=> setCity(e.target.value)} value={city} readOnly={editMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -63,7 +120,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Ulica:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'Ulica'} readOnly={!isEditable}/>
+                <input type="text" onChange={e=> setStreetName(e.target.value)} value={streetName} readOnly={editMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -71,7 +128,7 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Nr. domu:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'nr domu'} readOnly={!isEditable}/>
+                <input type="text" onChange={e=> setHomeNr(e.target.value)} value={homeNr} readOnly={editMember}/>
               </div> 
             </div>
             <div className='row'>
@@ -79,20 +136,22 @@ export const UserForm = ({isEditable, user}) => {
                 <p>Data urodzenia:</p>
               </div>
               <div className='col'>
-                <input type="text" value={'data urodzenia'} readOnly={newUser}/>
+                <input type="text"  onChange={e=> setBirthday(e.target.value)} value={birthday} readOnly={newMember}/>
               </div> 
             </div>
           </div>  
         </div>  
-        <div className='row card-number'>
+        { (userData.cardNumber || newOrEdit === 'new') && <div className='row card-number'>
           <div className='col-3'>
             <p>Numer karty bibliotecznej:</p>
           </div>
           <div className='col-2'>
-            <input type="text" value={'Numer karty'} readOnly={newUser}/>
+            <input type="text" onChange={e=> setCardNumber(e.target.value)} value={cardNumber} readOnly={true}/>
           </div> 
-        </div>
+        </div>}
       </form>
+      <button onClick={funLogOut}>Wyloguj</button>
+      <button onClick={addPerson}>Dodaj czytelnika</button>
     </div>
   )
 }

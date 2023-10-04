@@ -4,9 +4,10 @@ export const AddBook = () => {
 
   return(
     <div className="container add-book-module">
+      <h4>Dodaj książkę</h4>
       <form>
-        <div className="row">
-          <div className="col">
+        <div className="row ">
+          <div className="col ">
             <h1>image</h1>
           </div>
           <div className="col">
@@ -18,7 +19,7 @@ export const AddBook = () => {
                 <input type="text" value={'Tytuł'} />
               </div> 
             </div>
-            <div className='row'>
+            <div className='row '>
               <div className='col'>
                 <p>Autor:</p>
               </div>
@@ -34,7 +35,7 @@ export const AddBook = () => {
               <input type="number" id="year" className='year' name="year"/>
               </div> 
             </div>
-            <div className='row'>
+            <div className='row '>
               <div className='col'>
                 <p>Kategoria:</p>
               </div>

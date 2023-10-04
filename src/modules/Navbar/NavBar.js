@@ -4,18 +4,32 @@ import { faMagnifyingGlass, faAddressBook, faUser } from '@fortawesome/free-soli
 import FormDialog from '../PopUp/PopUp';
 import { useState } from "react";
 import "./NavBar.scss"
+import { useUser } from "../../hooks/ApiHooks/useUsers";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = () =>{
 
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const { isLogged, userData } = useUser()
+  const navigate = useNavigate()
 
   const handleOpenDialog = () => {
+    if(isLogged){
+      if(userData.cardNumber === undefined){
+        navigate('login/employee')
+      }else{
+        navigate('login/user')
+      }
+      
+    }else{
       setDialogOpen(true);
-  };
-
+    }
+  }  
   const handleCloseDialog = () => {
       setDialogOpen(false);
   };
+
+  console.log('userData', userData)
 
   return(
     <div className="navbar-module">
@@ -41,7 +55,7 @@ export const NavBar = () =>{
           <div className="row" onClick={handleOpenDialog}>
             <Link onClick={handleOpenDialog}>
               <FontAwesomeIcon icon={faUser} /> 
-              <p>Zaloguj</p>
+              {!isLogged ?<p>Zaloguj</p> : <p>Witaj {userData.firstName}</p>}
             </Link>
           </div>
         </div>

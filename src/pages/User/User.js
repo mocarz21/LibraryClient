@@ -15,8 +15,8 @@ export const User = () =>{
       </div>
       <Routes>
         <Route path="/" element={<Navigate to="data" />} />
-        <Route path="data" element = { <UserForm isEditable = { false }/> } />
-        <Route path ="editData" element = {<UserForm isEditable = { true }/>}/>
+        <Route path="data" element = { <UserForm /> } />
+        <Route path ="editData" element = {<UserForm newOrEdit ={'edit'}/>}/>
         <Route path="borrowed" element = { <BorrowedBooks/> }/>
       </Routes>
     </div>
