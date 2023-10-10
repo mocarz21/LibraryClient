@@ -2,7 +2,7 @@ import { fetchSetting } from './fetchConfig'
 import {useQuery} from  './useQuery'
 
 export const returnFetch = async ({ endpoint, body }) => {
-    const output = await fetch (`http://localhost:8000/${endpoint}`,{
+    const output = await fetch (`http://localhost:8080/${endpoint}`,{
         ...fetchSetting,
         headers: {
             ...fetchSetting.headers,

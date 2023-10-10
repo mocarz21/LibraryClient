@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { UserContext } from '../../providers/UserProviders'
 import { fetchPayload } from '../../OdevFetch/fetchPayload'
 import { fetchSetting } from "../../OdevFetch/fetchConfig";
+import { useQuery } from '../../OdevFetch/useQuery'
 
-export const useUser = () => {
+export const useUser = (id) => {
   
   const context = useContext(UserContext);
 
@@ -11,6 +12,9 @@ export const useUser = () => {
     throw new Error("useUser was used outside of its Provider");
   }
   const { isLogged, setLogged, setUserData, userData } = context;
+
+    const endpoint = id ? `users/${id}` : `users`;
+    const { loading, payload, refetch } = useQuery({ endpoint });
 
   const logIn = async (login, password) => {
     let data = null;
@@ -36,7 +40,7 @@ export const useUser = () => {
     return data;
   };
 
-const isLoggedIn = async () => {
+  const isLoggedIn = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
     const refreshToken = sessionStorage.getItem("refreshToken");
     if(accessToken) {
@@ -62,12 +66,20 @@ const isLoggedIn = async () => {
           logOut();
       }
     }
-};
+  };
   const logOut = () => {
     sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("refreshToken");
     setLogged(false);
   };
 
-  return { logIn, userData, isLoggedIn, isLogged, logOut }; 
+  return { 
+    logIn,
+    userData, 
+    isLoggedIn, 
+    isLogged, 
+    logOut, 
+    payload,
+    loading
+  }; 
 }

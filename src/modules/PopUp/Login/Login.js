@@ -19,7 +19,7 @@ export const Login = (props) =>{
   const handleLogin = async event => {
     event.preventDefault();
     const output = await logInHook(login, password);
-      console.log('output.userData', output.userData)
+
     if (output && output.status === "success") {
       if(output.userData.cardNumber === undefined) {
         navigate('login/employee')

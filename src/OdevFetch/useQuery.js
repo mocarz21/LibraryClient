@@ -19,25 +19,24 @@ export const useQuery = ({ endpoint, query, isLazy }) => {
   };
 
   const fetchPayload = async ({ query }) => {
-    
+    console.log(sessionStorage.getItem('accessToken'))
     await fetch(`http://localhost:8080/${endpoint}${getQuery(query)}`, { 
       ...fetchSetting,
       method: "GET",
       headers: {
         ...fetchSetting.headers,
-        authorization: `Bearer ${sessionStorage.getItem('access-token')}`,
-        refreshToken: localStorage.getItem('refreshToken')
+        authorization: `${sessionStorage.getItem('accessToken')}`,
+        refreshToken: sessionStorage.getItem('refreshToken')
       },
     })
       .then(response => response.json())
       .then(res => {
         if (res && res.status && res.message) {
-          console.log('error');
         }
-        console.log('czesc')
         setPayload(res);
         setLoading(false);
       });
+      
   };
 
   const refetch = payload => {

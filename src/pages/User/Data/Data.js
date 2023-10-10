@@ -6,8 +6,7 @@ export const Data = ({isEditable, user}) => {
   if(!user){
     newUser = false
   }
-  console.log('newUser', newUser)
-  console.log('user', user)
+
   return(
     <div className="container data-module">
       <form>

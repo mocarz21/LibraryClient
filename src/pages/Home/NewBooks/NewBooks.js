@@ -1,15 +1,26 @@
 import { useBooks } from "../../../hooks/ApiHooks/useBooks"
+import FormDialog from '../../../modules/PopUp/PopUp';
+import { useState } from "react";
+
 import './NewBooks.scss'
 
 export const NewBooks = () =>{
 
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const { loading, payload, refetch } = useBooks();
 
   if(loading) return 'is Loading'
   const books = payload.data.sort((a,b) => b.id-a.id)
   let newBooks = books.slice(0,6)
-  
-  console.log('books',books)
+
+  const handleCloseDialog =() =>{
+    setDialogOpen(false)
+  }
+
+  const openPopup = () =>{
+    setDialogOpen(true)
+  }
+
   return(
     <div className="container new-books-module">
       <div className="row">
@@ -27,11 +38,12 @@ export const NewBooks = () =>{
               <p className="card-text">{book.opis}</p>
             </div>
             <div className="card-footer text-body-secondary">
-              <a href="#" className="btn btn-primary">Więcj informacji</a>
+              <a  className="btn btn-primary" onClick={openPopup}>Więcj informacji</a>
             </div>
           </div>
         </div>)}
-      </div>  
+      </div>
+      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"book"}/>  
     </div>
   )
 }

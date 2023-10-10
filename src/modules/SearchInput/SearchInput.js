@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useUser } from '../../hooks/ApiHooks/useUsers'
 import './SearchInput.scss'
 
-export const SearchInput = () => {
+export const SearchInput = ({user}) => {
 
   return(
     <div className="search-input-module container ">
@@ -13,7 +14,7 @@ export const SearchInput = () => {
             <FontAwesomeIcon icon={faMagnifyingGlass} />  
           </button>
         </div>
-        <div className='search-filters '>
+        {!user && <div className='search-filters '>
           <div className='main-filters row'>
             <div className='col-7 col-md-3 '>
               <label for="genre">Kategoria: </label>
@@ -38,7 +39,7 @@ export const SearchInput = () => {
               </select>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   )

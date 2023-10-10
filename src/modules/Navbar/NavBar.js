@@ -29,8 +29,6 @@ export const NavBar = () =>{
       setDialogOpen(false);
   };
 
-  console.log('userData', userData)
-
   return(
     <div className="navbar-module">
       <div className="row justify-content-between">
@@ -60,7 +58,7 @@ export const NavBar = () =>{
           </div>
         </div>
       </div>
-      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} />
+      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"logIn"}/>
     </div>
   )
 }

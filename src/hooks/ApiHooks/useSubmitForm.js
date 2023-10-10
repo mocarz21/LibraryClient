@@ -28,7 +28,6 @@ const useSubmitForm = (endpoint) => {
     
     setIsLoading(true);
     setError(null);
-    console.log('data', data)
     try {
       const response = await fetchPayload({ 
         endpoint:"secure/employee/addUser",
