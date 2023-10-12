@@ -19,7 +19,6 @@ export const useQuery = ({ endpoint, query, isLazy }) => {
   };
 
   const fetchPayload = async ({ query }) => {
-    console.log(sessionStorage.getItem('accessToken'))
     await fetch(`http://localhost:8080/${endpoint}${getQuery(query)}`, { 
       ...fetchSetting,
       method: "GET",

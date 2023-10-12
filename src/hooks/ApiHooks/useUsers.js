@@ -3,6 +3,7 @@ import { UserContext } from '../../providers/UserProviders'
 import { fetchPayload } from '../../OdevFetch/fetchPayload'
 import { fetchSetting } from "../../OdevFetch/fetchConfig";
 import { useQuery } from '../../OdevFetch/useQuery'
+import { returnFetch } from "../../OdevFetch/returnFetch";
 
 export const useUser = (id) => {
   
@@ -73,6 +74,11 @@ export const useUser = (id) => {
     setLogged(false);
   };
 
+  const remove = async ( id ) => {
+    const data = await returnFetch({ endpoint: `secure/users/${id}/remove` });
+    return data;
+  };
+
   return { 
     logIn,
     userData, 
@@ -80,6 +86,7 @@ export const useUser = (id) => {
     isLogged, 
     logOut, 
     payload,
-    loading
+    loading,
+    remove
   }; 
 }

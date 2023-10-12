@@ -9,6 +9,7 @@ export const UserForm = ({newOrEdit}) => {
   const { logOut, userData } = useUser();
   const { handleSubmit } = useSubmitForm("/secure/employee/addUser");
 
+  const [ id, setId ] = useState(userData.id)
   const [ name , setName] = useState(userData.firstName)
   const [ lastName , setLastName] = useState(userData.lastName)
   const [ pesel , setPesel] = useState(userData.pesel)
@@ -50,17 +51,22 @@ export const UserForm = ({newOrEdit}) => {
   }
   let newMember = true
   let editMember = true
+  let employeeEditMember = true
 
   if(newOrEdit === 'edit'){
     editMember = false
   }if(newOrEdit === 'new'){
     newMember = false
     editMember = false
+  }if(newOrEdit === 'employeeEdit'){
+    newMember = false
+    editMember = false
+    employeeEditMember = false
   }
   
   const addPerson = async (e) =>{
     e.preventDefault();
-    const userDataToSend = { name, lastName, pesel, email, city, streetName, homeNr, birthday, cardNumber };
+    const userDataToSend = {id, name, lastName, pesel, email, city, streetName, homeNr, birthday, cardNumber };
     await handleSubmit(e, userDataToSend); // przekaż dane do handleSubmit
   };
   
@@ -150,8 +156,14 @@ export const UserForm = ({newOrEdit}) => {
           </div> 
         </div>}
       </form>
-      <button onClick={funLogOut}>Wyloguj</button>
-      <button onClick={addPerson}>Dodaj czytelnika</button>
+      <div>
+        {employeeEditMember === true &&<div>
+          <button onClick={funLogOut}>Wyloguj</button>
+        </div>}  
+        {newOrEdit && <div>
+          <button onClick={addPerson}>{newOrEdit === 'edit' || newOrEdit === 'employeeEdit' ? 'Edytuj czytelnika' : 'Dodaj czytelnika' }</button>
+        </div>}
+      </div>
     </div>
   )
 }

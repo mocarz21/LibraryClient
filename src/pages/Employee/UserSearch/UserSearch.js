@@ -2,24 +2,25 @@ import { SearchInput } from '../../../modules/SearchInput/SearchInput'
 import { useUser } from '../../../hooks/ApiHooks/useUsers'
 import './UserSearch.scss'
 import FormDialog from '../../../modules/PopUp/PopUp';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const UserSearch = () =>{
 
-  const [isDialogOpen, setDialogOpen] = useState(false);
-  const { payload, loading} = useUser()
-  
-  if(loading) return 'loading'
-  
-  const users = payload.data.filter(e=> e.source === 'Users')
-  console.log(users)
+  const { payload } = useUser()
+  const [ isDialogOpen, setDialogOpen ] = useState(false);
+  const [ users, setUsers ] = useState()
+  const [ userId, setUserId ] = useState()
 
+  useEffect(() => {
+    if(payload && payload.data) {
+      const onlyUsers = payload.data.filter(e=> e.source === 'Users')
+      setUsers(onlyUsers)
+  }},[payload])
 
   const recordData = (id) =>{
-    console.log(id)
+    setUserId(id)
     setDialogOpen(true)
   }
-
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -30,7 +31,7 @@ export const UserSearch = () =>{
       <div className='row'>
         <h4> Wyszukaj użytkownika</h4>
       </div>
-      <SearchInput user={true}/>
+      <SearchInput user={true} action={setUsers}/>
       <div className='row data-info'> 
           <div className='col'>
             <p>Imie</p>
@@ -45,7 +46,7 @@ export const UserSearch = () =>{
             <p>Podgląd</p>
           </div>`
       </div>
-      {users.map(user=> <div key={user.id}className='row person-data'>
+      {users?.map(user=> <div key={user.id}className='row person-data'>
         <div className='col'>
           <p>{user.imie}</p>
         </div>
@@ -59,7 +60,7 @@ export const UserSearch = () =>{
           <button onClick={()=>recordData(user.id)}>Podgląd/Edycja</button>
         </div>
       </div>)}
-      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"user"}/>
+      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"userId"} userId={userId} />
     </div>  
   )
 }

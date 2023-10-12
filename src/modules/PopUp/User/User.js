@@ -6,22 +6,13 @@ import { UserForm } from '../../UserForm/UserForm'
 
 export const User = (props) =>{
 
-const handleEdit = () =>{
-  
-}
-
-
-
   return(
-    <>
+    <div>
       <DialogTitle>Podgląd Czytelnika</DialogTitle>
       <DialogContent>
-        <UserForm />
+        <UserForm newOrEdit ={'employeeEdit'}/>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleEdit}>Edytuj</Button>
-      </DialogActions>
-    </>
+    </div>
   )
 
 }
