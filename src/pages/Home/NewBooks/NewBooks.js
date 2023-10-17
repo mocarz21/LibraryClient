@@ -7,6 +7,7 @@ import './NewBooks.scss'
 export const NewBooks = () =>{
 
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [bookId, setBookId] = useState()
   const { loading, payload, refetch } = useBooks();
 
   if(loading) return 'is Loading'
@@ -17,7 +18,8 @@ export const NewBooks = () =>{
     setDialogOpen(false)
   }
 
-  const openPopup = () =>{
+  const openPopup = (bookId) =>{
+    setBookId(bookId)
     setDialogOpen(true)
   }
 
@@ -30,7 +32,7 @@ export const NewBooks = () =>{
       </div>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {newBooks.map(book=> 
-        <div className="col-12 offset-1 col-md-4 offset-md-0 ">
+        <div key={book.id} className="col-12 offset-1 col-md-4 offset-md-0 ">
           <div className="card h-100" style={{width: "18rem"}}>
             <img src={ `./${book.id}.jpg`} className="card-img-top" alt="..."/>
             <div className="card-body">
@@ -38,12 +40,12 @@ export const NewBooks = () =>{
               <p className="card-text">{book.opis}</p>
             </div>
             <div className="card-footer text-body-secondary">
-              <a  className="btn btn-primary" onClick={openPopup}>Więcj informacji</a>
+              <a  className="btn btn-primary" onClick={()=>openPopup(book.id)}>Więcj informacji</a>
             </div>
           </div>
         </div>)}
       </div>
-      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"book"}/>  
+      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"book"} bookId={bookId}/>  
     </div>
   )
 }

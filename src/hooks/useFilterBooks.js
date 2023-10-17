@@ -7,7 +7,7 @@ export const useFilterBooks = (data) =>{
   if (loading) return <div>Loading ....</div>
 
   const { textSearch, genre, year, available, language } = data
-  console.log(textSearch)
+  
   const filteredBooks = payload.data.filter(book => {
     if (textSearch && !(book.tytul.toLowerCase().includes(textSearch.toLowerCase()) || book.autor.toLowerCase().includes(textSearch.toLowerCase()))) return false;
     if (genre !== 'all' && book.kategoria !== genre) return false;

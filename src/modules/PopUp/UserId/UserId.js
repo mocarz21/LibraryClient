@@ -1,9 +1,10 @@
 import { useUser } from '../../../hooks/ApiHooks/useUsers'
 import { useEffect, useState } from 'react';
+import { Rentals } from "./Rentals/Rentals"
 import useSubmitForm from '../../../hooks/ApiHooks/useSubmitForm';
 
+
 export const UserId = ({userId, onClose}) => {
-  
   const { payload, loading, remove } = useUser(userId);
   const { handleSubmit } = useSubmitForm("/secure/employee/addUser");
   
@@ -128,15 +129,16 @@ export const UserId = ({userId, onClose}) => {
             <input type="text" onChange={e=> setCardNumber(e.target.value)} value={cardNumber} readOnly={true}/>
           </div> 
         </div>
+        <div className='row'>
+          <div className='col'>
+            <button onClick={editPerson}>Edytuj</button>
+          </div>
+          <div className='col'>
+            <button onClick={deleteUser}>Usuń urzytkownika</button>
+          </div>
+        </div>
       </form>
-      <div className='row'>
-        <div className='col'>
-          <button onClick={editPerson}>Edytuj</button>
-        </div>
-        <div className='col'>
-          <button onClick={deleteUser}>Usuń urzytkownika</button>
-        </div>
-      </div>
+      <Rentals/>
     </div>
   )
 }

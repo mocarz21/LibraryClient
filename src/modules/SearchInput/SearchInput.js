@@ -26,14 +26,14 @@ export const SearchInput = ({user,action}) => {
       <div className='row'>
         <div className='search-container col align-self-center'>
           <input type="text" className="search-input" placeholder="Wyszukaj..." value={textSearch} onChange={e=> setTextSearch(e.target.value)}/>
-          <button class="search-button" onClick={(sendDataToSearch)}>
+          <button className="search-button" onClick={(sendDataToSearch)}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />  
           </button>
         </div>
         {!user && <div className='search-filters '>
           <div className='main-filters row'>
             <div className='col-7 col-md-3 '>
-              <label for="genre">Kategoria: </label>
+              <label htmlFor="genre">Kategoria: </label>
               <select id="genre" name='genre' value={genre} onChange={e => setGenre(e.target.value)}>
                 <option value='all'>Wszystko</option>
                 <option value='fantasy'>Fantastyka</option>
@@ -45,10 +45,10 @@ export const SearchInput = ({user,action}) => {
             </div>
             <div className='col-7 col-md-2 '>
               <input type='checkbox' id="available" name="available" value={available} onChange={e => setAvailable(e.target.checked) }/>
-              <label for="available">Tylko dostępne</label>
+              <label htmlFor="available">Tylko dostępne</label>
             </div>
             <div className='col-5 col-md-2 '>
-              <label for="language">Język: </label>
+              <label htmlFor="language">Język: </label>
               <select id='language' name='language' value={language} onChange={e=> setLanguage(e.target.value)}>
                 <option value='pl'>Polski</option>
                 <option value='en'>Angielski</option>

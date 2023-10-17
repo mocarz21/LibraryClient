@@ -1,0 +1,15 @@
+@import '../../settings.scss';
+
+.footer-module{
+  font-family: $font-text;
+  min-width: 100%;
+  margin: 0;
+  background-color: $primary-color;
+  color: $white-color;
+  padding-top: 20px;
+  svg{
+    font-size:x-large;
+    color: $white-color;
+  }
+
+}

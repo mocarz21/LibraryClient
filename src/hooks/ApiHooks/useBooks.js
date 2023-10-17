@@ -6,8 +6,6 @@ export const useBooks = (bookId) => {
 
   const { loading, payload, refetch } = useQuery({ endpoint });
 
- 
-
   const save = async ( body ) => {
 
     const transformedBody = {

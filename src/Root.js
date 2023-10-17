@@ -8,6 +8,7 @@ import { User } from './pages/User/User';
 import { Employee } from './pages/Employee/Employee'
 import { useUser } from "./hooks/ApiHooks/useUsers";
 import { useEffect } from "react";
+import { Footer } from './modules/Footer/Footer'
 import  Alert  from './modules/Alert/Alert'
 export const Root = () => {
 
@@ -28,6 +29,7 @@ export const Root = () => {
         <Route path = "/logIn/user/*" element = { <User/> }/>
         <Route path = "/logIn/employee/*" element = { <Employee/> }/>
       </Routes>
+      <Footer/>
       <Alert/>
     </>
   )

@@ -1,11 +1,14 @@
 import { SearchInput } from '../../modules/SearchInput/SearchInput'
 import { useBooks } from '../../hooks/ApiHooks/useBooks'
 import { useState, useEffect } from 'react'
+import FormDialog from '../../modules/PopUp/PopUp';
 import './Search.scss'
 
 export const Search = () => {
   const {loading, payload} = useBooks()
   const [books, setBooks ] = useState()
+  const [bookId, setBookId] = useState()
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     if(payload && payload.data) {
@@ -20,8 +23,13 @@ export const Search = () => {
     return book ? snippet + '...' : ' ' 
   }
 
-  const recordData = () =>{
+  const handleCloseDialog =() =>{
+    setDialogOpen(false)
+  }
 
+  const openPopup = (bookId) =>{
+    setBookId(bookId)
+    setDialogOpen(true)
   }
   return(
     <div className='search-module'>
@@ -55,9 +63,10 @@ export const Search = () => {
           <p>{descriptionSnippet(book.opis)}</p>
         </div>
         <div className='col'>
-          <button onClick={()=>recordData(book.id)}>Podgląd/Edycja</button>
+          <button onClick={()=>openPopup(book.id)}>Podgląd/Edycja</button>
         </div>
       </div>)}
+      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"book"} bookId={bookId}/>
     </div>
   )
 }

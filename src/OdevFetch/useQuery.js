@@ -19,6 +19,7 @@ export const useQuery = ({ endpoint, query, isLazy }) => {
   };
 
   const fetchPayload = async ({ query }) => {
+ 
     await fetch(`http://localhost:8080/${endpoint}${getQuery(query)}`, { 
       ...fetchSetting,
       method: "GET",
@@ -43,6 +44,7 @@ export const useQuery = ({ endpoint, query, isLazy }) => {
     fetchPayload({
       query: payload?.query || {},
     });
+    console.log('use refetch')
   };
 
   useEffect(() => {
