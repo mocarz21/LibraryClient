@@ -1,27 +1,62 @@
 @import '../../settings.scss';
-.navbar-module{
+.navbar-module {
   background-color: $primary-color;
-
-  .logo-box{
-    img{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  .logo-box {
+    img {
       object-fit: cover;
       width: 250px;
       height: 100px;
+      transition: width 0.8s ease-in-out, height 0.8s ease-in-out;
     }
   }
 
-  .item-box{
-    align-items: center;
-    justify-content: space-around;
-    a{
-      color: $white-color;
-      margin-right: 10px; 
-      font-family: $font-text;
-      text-decoration: dotted;
+  &.scrolled {
+    .logo-box img {
+      width: auto;
+      height: 50px;
     }
   }
-  svg{
+
+  .item-box {
+    align-items: center;
+    justify-content: space-around;
+    a {
+      color: $white-color ;
+      margin-right: 10px;
+      font-family: $font-text;
+      text-decoration: dotted;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  svg {
     color: $white-color;
   }
 
+  @media(max-width: 768px){
+    .logo-box{
+      img{
+        width: 125px;
+        height: 50px;
+        transition: opacity 0.8s ease-in-out , height 0.8s ease-in-out
+      }
+    }
+
+    &.scrolled{
+      .logo-box img {
+        opacity: 0;
+        height: 0;
+      }
+    }
+
+    .item-box{
+      margin-top: 10px;
+    }
+  }
 }

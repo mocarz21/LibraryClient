@@ -22,13 +22,13 @@ export const Contact = () => {
         </div>
         <div className="col-12 info">
           <div className="row justify-content-center">
-            <div className="col-3">
+            <div className="col-sm-2 col-4 p-0 ">
               <p>NIP</p>
               <p>REGON</p>
               <p>NUMER KONTA</p>
               <p>BANK</p>
             </div>
-            <div className="col-5 col-md-3">
+            <div className="col-8 col-md-3 col-sm-3">
               <p>258852456</p>
               <p>456654451</p>
               <p>12345678900001452367891</p>

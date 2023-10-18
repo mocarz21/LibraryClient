@@ -8,4 +8,20 @@
   p{
     font-family: $font-text ;
   }
+  .data-info{
+    border-bottom: 2px solid black;
+    p{
+      margin-bottom: 5px;
+    }
+  }
+  .person-data{
+    margin-top: 2px;   
+  }
+
+  @media(max-width: 728px){
+    .sm-window{
+      display: none;
+    }
+    
+  }
 }

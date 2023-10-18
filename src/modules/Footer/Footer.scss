@@ -7,9 +7,31 @@
   background-color: $primary-color;
   color: $white-color;
   padding-top: 20px;
+  text-align: left;
+
+  .sm-window{
+    display: none;
+  }
   svg{
     font-size:x-large;
     color: $white-color;
+    transition: font-size 0.5s ease-in-out;
+
+    &:hover{
+      font-size: xx-large;
+    }
+  }
+  .statute{
+    cursor: pointer;
   }
 
+  @media(max-width: 900px){
+    .information{
+      display: none;
+    }
+    .sm-window{
+      display:block;
+      padding-bottom: 1px;
+    }
+  }
 }

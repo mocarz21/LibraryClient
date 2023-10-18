@@ -48,7 +48,7 @@ export const Search = () => {
           <div className='col'>
             <p>Opis</p>
           </div>
-          <div className='col'>
+          <div className='col sm-window'>
             <p>Podgląd</p>
           </div>
       </div>
@@ -59,11 +59,11 @@ export const Search = () => {
         <div className='col'>
           <p>{book.autor}</p>
         </div>
-        <div className='col'>
+        <div className='col sm-window'>
           <p>{descriptionSnippet(book.opis)}</p>
         </div>
         <div className='col'>
-          <button onClick={()=>openPopup(book.id)}>Podgląd/Edycja</button>
+          <button className="btn btn-primary" onClick={()=>openPopup(book.id)}>Podgląd</button>
         </div>
       </div>)}
       <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"book"} bookId={bookId}/>

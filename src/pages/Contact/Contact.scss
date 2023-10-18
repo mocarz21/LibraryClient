@@ -36,4 +36,8 @@
       color: orange
     }
   }
+
+  @media(max-width: 728px){
+    text-align: left;
+  }
 }

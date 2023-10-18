@@ -38,16 +38,16 @@ export const Book = (props) =>{
     <>
       <DialogTitle><h3>{book.tytul}</h3></DialogTitle>
       <DialogContent>
-        <div className='container book-module'>
-          <div className='row'>
-            <div className='col-6'>
+        <div className='container book-module text-center'>
+          <div className='row '>
+            <div className='col-6 small-screen'>
               <img src={ `${book.id}.jpg`}/>
             </div>
-            <div className='col-6'>
-              <h5>Autor: { book.autor }</h5>
-              <h5>Kategoria: { book.kategoria }</h5>
-              <h5>Rok wydania: { book.rok_wydania }</h5>
-              <h5>Opis: { book.opis }</h5>
+            <div className='col-sm-6 col-12 align-self-center'>
+              <h5><b>Autor:</b></h5> <p>{ book.autor }</p>
+              <h5><b>Kategoria:</b></h5><p>{ book.kategoria }</p> 
+              <h5><b>Rok wydania:</b></h5><p>{ book.rok_wydania }</p> 
+              <h5><b>Opis:</b></h5><p className='description'>{ book.opis }</p> 
             </div>
           </div>
         </div>

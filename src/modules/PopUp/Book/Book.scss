@@ -1,9 +1,30 @@
+@import '../../../settings.scss';
+
 .book-module{
+  color: $primary-color;
+  font-family: $font-text;
+
+  h3{
+    font-family: $font-title;
+  }
+
+  h5, .description{
+    text-align: justify;
+  }
+
+  p{
+    margin-bottom: 3px;
+  }
 
   img{
     max-width: 100%;
     height: auto;
     object-fit: cover;
+  }
 
+  @media(max-width: 728px){
+    .small-screen{
+      display: none;
+    }
   }
 }
