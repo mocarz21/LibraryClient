@@ -24,7 +24,7 @@ export const Footer = () => {
   }
 
   return(
-    <div className="container footer-module">
+    <div className="container footer-module sticky-bottom">
       <div className="row">
         <div className="col-6 statute" onClick={openPopup}>
           <p>Regulamin</p>

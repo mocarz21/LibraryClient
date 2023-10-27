@@ -44,7 +44,6 @@ export const useQuery = ({ endpoint, query, isLazy }) => {
     fetchPayload({
       query: payload?.query || {},
     });
-    console.log('use refetch')
   };
 
   useEffect(() => {

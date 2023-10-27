@@ -1,0 +1,46 @@
+@import '../../../settings.scss';
+.add-book-module{
+  input,select{
+    margin-top: 5px;
+  }
+  textarea{
+    width: 80%;
+    height: 160px;
+  }
+  .image-preview{
+    img{
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+  .border-rounded{
+    width: 200px;
+    height:200px;
+    border: 2px solid $btn-color;
+    border-radius: 200px;
+    padding: 10px;
+    display: inline-block;
+    padding-top: 4.6rem;
+    color: $second-color;
+    background: $btn-color;
+    &:hover{
+      background: $btn-hover;
+    }
+  }
+  .border-rectangle{
+    cursor: pointer;
+    padding: 15px;
+    margin: 2.6rem;
+    border: 2px solid $btn-color;
+    border-radius: 10px;
+    background: $btn-color;
+    color: $second-color;
+    &:hover{
+      background: $btn-hover;
+    }
+  }
+  button{
+    margin-top: 15px;
+  }
+}

@@ -31,6 +31,8 @@ export const useUser = (id) => {
     if (data.status === "success") {
       sessionStorage.setItem("accessToken", data.body.accessToken);
       sessionStorage.setItem("refreshToken", data.body.refreshToken);
+      console.log('refreshtoken logowanie', data.body.refreshToken)
+      console.log("data.body.access logowanie",data.body.accessToken)
       setLogged(true);
       setUserData(data.body);
       return { status: data.status, userData: data.body };
@@ -44,6 +46,9 @@ export const useUser = (id) => {
   const isLoggedIn = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
     const refreshToken = sessionStorage.getItem("refreshToken");
+
+    console.log('refreshtoken odswiezanie', refreshToken)
+    console.log("data.body.access odswiezanie",accessToken)
     if(accessToken) {
       try{
         const response = await fetch(`${process.env.REACT_APP_API_PATH}/secure/isLogged/${accessToken.split(" ")[1]}`, {

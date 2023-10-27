@@ -9,6 +9,7 @@ export const useBooks = (bookId) => {
   const save = async ( body ) => {
 
     const transformedBody = {
+      nazwa_Img: body.imgName,
       tytul: body.title,
       autor: body.author,
       rok_wydania: body.publishYear,

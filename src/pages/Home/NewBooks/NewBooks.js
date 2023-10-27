@@ -1,6 +1,7 @@
 import { useBooks } from "../../../hooks/ApiHooks/useBooks"
 import FormDialog from '../../../modules/PopUp/PopUp';
 import { useState } from "react";
+import { useImg } from "../../../hooks/ApiHooks/useImg"
 
 import './NewBooks.scss'
 
@@ -9,8 +10,9 @@ export const NewBooks = () =>{
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [bookId, setBookId] = useState()
   const { loading, payload, refetch } = useBooks();
+  const { images, loading: loadingImg } = useImg()
 
-  if(loading) return 'is Loading'
+  if( loading || loadingImg ) return 'is Loading'
   const books = payload.data.sort((a,b) => b.id-a.id)
   let newBooks = books.slice(0,6)
 
@@ -34,7 +36,7 @@ export const NewBooks = () =>{
         {newBooks.map(book=> 
         <div key={book.id} className="col-12 offset-1 col-md-4 offset-md-0 ">
           <div className="card h-100" style={{width: "18rem"}}>
-            <img src={ `./${book.id}.jpg`} className="card-img-top" alt="..."/>
+            <img src={ images[book.nazwa_Img]} className="card-img-top" alt="..."/>
             <div className="card-body">
               <h5 className="card-title">{book.tytul}</h5>
               <p className="card-text">{book.opis}</p>

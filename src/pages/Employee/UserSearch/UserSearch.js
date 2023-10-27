@@ -42,13 +42,13 @@ export const UserSearch = () =>{
           <div className='col'>
             <p>Pesel</p>
           </div>
-          <div className='col'>
+          <div className='col d-none d-sm-block '>
             <p>Podgląd</p>
           </div>`
       </div>
       {users?.map(user=> <div key={user.id}className='row person-data'>
         <div className='col'>
-          <p>{user.imie}</p>
+          <p >{user.imie}</p>
         </div>
         <div className='col'>
           <p>{user.nazwisko}</p>
@@ -57,7 +57,7 @@ export const UserSearch = () =>{
           <p>{user.pesel}</p>
         </div>
         <div className='col'>
-          <button onClick={()=>recordData(user.id)}>Podgląd/Edycja</button>
+          <button className="btn btn-primary" onClick={()=>recordData(user.id)}>Podgląd/Edycja</button>
         </div>
       </div>)}
       <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"userId"} userId={userId} />

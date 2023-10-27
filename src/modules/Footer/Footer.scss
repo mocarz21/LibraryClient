@@ -1,6 +1,9 @@
 @import '../../settings.scss';
 
 .footer-module{
+  position:absolute;
+		bottom:-100px;
+		width:100%;
   font-family: $font-text;
   min-width: 100%;
   margin: 0;

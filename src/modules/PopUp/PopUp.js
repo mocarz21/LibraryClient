@@ -5,9 +5,9 @@ import { User } from './User/User'
 import { Book } from './Book/Book'
 import { UserId } from './UserId/UserId'
 import { Statute } from './Statute/Statute'
+import { BorrowedBookInfo } from './BorrowedBookInfo/BorrowedBookInfo';
 
 export default function FormDialog(props) {
-
   return (
     <div>
       <Dialog open={props.open} onClose={props.onClose}>
@@ -15,7 +15,8 @@ export default function FormDialog(props) {
         { props.use === "user" && <User  onClose= { props.onClose }/> } 
         { props.use === "book" && <Book  onClose= { props.onClose } bookId={props.bookId}/> }
         { props.use === "userId" && <UserId  onClose= { props.onClose } userId={props.userId}/> }
-        { props.use === "statute" && <Statute onClose= { props.onClose }/>}
+        { props.use === "statute" && <Statute onClose= { props.onClose }/> }
+        { props.use === "borrowed" && <BorrowedBookInfo onClose= { props.onClose } info = { props.book }/> }
       </Dialog>
     </div>
   );

@@ -8,8 +8,6 @@ export const UserId = ({userId, onClose}) => {
   const { payload, loading, remove } = useUser(userId);
   const { handleSubmit } = useSubmitForm("/secure/employee/addUser");
   
-  console.log(payload)
-  
   const [id, setId] = useState(userId);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");

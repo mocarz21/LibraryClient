@@ -75,12 +75,12 @@ export const UserForm = ({newOrEdit}) => {
     <div className="container data-module">
       <form>
         <div className="row">
-          <div className="col-6">
+          <div className="col-12 col-sm-6">
             <div className="img-box">
               <img src="/avatar/luz.jpg" alt="AVATAR"/>
             </div>
           </div>
-          <div className="col-4 data-info">
+          <div className="col-12 col-sm-6 data-info">
             <div className='row'>
               <div className='col'>
                 <p>Imię:</p>
@@ -156,13 +156,13 @@ export const UserForm = ({newOrEdit}) => {
           </div> 
         </div>}
       </form>
-      <div>
-        {employeeEditMember === true &&<div>
-          <button onClick={funLogOut}>Wyloguj</button>
-        </div>}  
-        {newOrEdit && <div>
-          <button onClick={addPerson}>{newOrEdit === 'edit' || newOrEdit === 'employeeEdit' ? 'Edytuj czytelnika' : 'Dodaj czytelnika' }</button>
+      <div className='row'>
+        {newOrEdit && <div className='col'>
+          <button className="btn btn-primary" onClick={addPerson}>{newOrEdit === 'edit' || newOrEdit === 'employeeEdit' ? 'Edytuj czytelnika' : 'Dodaj czytelnika' }</button>
         </div>}
+        {employeeEditMember === true &&<div className='col'>
+          <button className="btn btn-primary" onClick={funLogOut}>Wyloguj</button>
+        </div>}  
       </div>
     </div>
   )
