@@ -13,7 +13,7 @@ const useSubmitForm = (endpoint) => {
 
   const handleSubmit = async (e,data) => {
     const userData ={
-      id: data.id,  // jeśli istnieje
+      id: data.id,
       imie: data.name,
       nazwisko: data.lastName,
       email: data.email,
@@ -23,6 +23,9 @@ const useSubmitForm = (endpoint) => {
       nr_domu: data.homeNr,
       data_urodzenia: data.birthday,
       nr_karty_bibliotecznej: data.cardNumber,
+    }
+    if(data.id){
+      userData.id = data.id
     }
     e.preventDefault();
     

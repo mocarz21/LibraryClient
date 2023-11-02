@@ -14,7 +14,7 @@ export const BorrowedBookInfo = ({info, onClose}) =>{
       </div>
       <div className="row">
         <div className="col">
-          <p><b>Status: </b>{info.approved === '0'? "Oczekujące" : info.return_date  ? "Oddane" : "Wypożyczone"}</p>
+          <p><b>Status:</b>{info.approved === '0'? "Oczekujące" : info.return_date  ? "Oddane" : "Wypożyczone"}</p>
         </div>
       </div>
       <div className="row">

@@ -60,7 +60,7 @@ export const AddBook = () => {
           <div className="col-sm-6 col-12 image-preview" {...getRootProps()}>
             <input type="file" name="file" onChange={(e) => setImgAndImgName(e.target.files[0])} {...getInputProps()}/>
             {imgUrl && <img src={imgUrl} alt="obrazek"/>}
-            {imgUrl ? '': isDragActive ? <h2 className="border-rounded">Upuść tutaj</h2> : <h4 className="border-rectangle">Przeciągnij i upuść lub kliknij i wybierz obraz którego chcesz użyć</h4>}
+            {imgUrl ? '': isDragActive ? <h2 className="border-rounded">Upuść tutaj</h2> : <div className="border-rectangle"><h4 >Przeciągnij i upuść lub kliknij i wybierz obraz którego chcesz użyć</h4><p>zdjęcia muszą być w formacie .jpg</p></div>}
             <p>{imgName}</p>
           </div>
           <div className="col">

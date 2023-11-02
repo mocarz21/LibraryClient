@@ -129,14 +129,14 @@ export const UserId = ({userId, onClose}) => {
         </div>
         <div className='row'>
           <div className='col'>
-            <button onClick={editPerson}>Edytuj</button>
+            <button className='btn btn-primary' onClick={editPerson}>Edytuj</button>
           </div>
           <div className='col'>
-            <button onClick={deleteUser}>Usuń urzytkownika</button>
+            <button className='btn btn-primary' onClick={deleteUser}>Usuń urzytkownika</button>
           </div>
         </div>
       </form>
-      <Rentals/>
+      <Rentals userId={userId}/>
     </div>
   )
 }

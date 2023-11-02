@@ -4,9 +4,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { HotKeys, GlobalHotKeys } from 'react-hotkeys';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/ApiHooks/useUsers"
+
 
 export const Login = (props) =>{
 
@@ -32,9 +34,14 @@ export const Login = (props) =>{
       setValidForm(false);
     }
   }
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleLogin(event);
+    }
+  };
 
   return(
-    <>
+    <HotKeys handlers={{ ENTER: handleLogin }}>
       <DialogTitle>Zaloguj</DialogTitle>
       <DialogContent>
         {validForm && <DialogContentText >W celu zalogowania podaj login i hasło</DialogContentText>}
@@ -59,12 +66,17 @@ export const Login = (props) =>{
           variant="standard"
           value={password}
           onChange={e=> setPassword( e.target.value )}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleLogin(e);
+            }
+          }}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleLogin}>Zaloguj</Button>
       </DialogActions>
-    </>
+    </HotKeys>
   )
 
 }

@@ -3,11 +3,13 @@ import { useUser } from '../../hooks/ApiHooks/useUsers'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useSubmitForm from '../../hooks/ApiHooks/useSubmitForm';
+import  FormDialog  from '../PopUp/PopUp'
 
 export const UserForm = ({newOrEdit}) => {
 
   const { logOut, userData } = useUser();
   const { handleSubmit } = useSubmitForm("/secure/employee/addUser");
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const [ id, setId ] = useState(userData.id)
   const [ name , setName] = useState(userData.firstName)
@@ -20,8 +22,15 @@ export const UserForm = ({newOrEdit}) => {
   const [ birthday , setBirthday] = useState(userData.birthday)
   const [ cardNumber, setCardNumber] = useState(userData.cardNumber)
 
+  const handleCloseDialog =() =>{
+    setDialogOpen(false)
+  }
+  const openPopup = () =>{
+    setDialogOpen(true)
+  }
+
   useEffect(() => {
-    if (newOrEdit && newOrEdit === 'new') {
+    if (newOrEdit === 'new') {
       setName('');
       setLastName('');
       setPesel('');
@@ -66,10 +75,13 @@ export const UserForm = ({newOrEdit}) => {
   
   const addPerson = async (e) =>{
     e.preventDefault();
-    const userDataToSend = {id, name, lastName, pesel, email, city, streetName, homeNr, birthday, cardNumber };
+    const userDataToSend = { name, lastName, pesel, email, city, streetName, homeNr, birthday, cardNumber };
+    if (newMember && !editMember) {
+      userDataToSend.id = id;
+    }
+    console.log(userDataToSend)
     await handleSubmit(e, userDataToSend); // przekaż dane do handleSubmit
   };
-  
 
   return(
     <div className="container data-module">
@@ -152,7 +164,7 @@ export const UserForm = ({newOrEdit}) => {
             <p>Numer karty bibliotecznej:</p>
           </div>
           <div className='col-2'>
-            <input type="text" onChange={e=> setCardNumber(e.target.value)} value={cardNumber} readOnly={true}/>
+            <input type="text" onChange={e=> setCardNumber(e.target.value)} value={cardNumber} readOnly={newMember}/>
           </div> 
         </div>}
       </form>
@@ -160,10 +172,13 @@ export const UserForm = ({newOrEdit}) => {
         {newOrEdit && <div className='col'>
           <button className="btn btn-primary" onClick={addPerson}>{newOrEdit === 'edit' || newOrEdit === 'employeeEdit' ? 'Edytuj czytelnika' : 'Dodaj czytelnika' }</button>
         </div>}
-        {employeeEditMember === true &&<div className='col'>
+        {employeeEditMember === true &&<div className='col butons'>
           <button className="btn btn-primary" onClick={funLogOut}>Wyloguj</button>
-        </div>}  
+          <button className="btn btn-primary" onClick={openPopup}>Zmień hasło</button>
+        </div>
+        }  
       </div>
+      <FormDialog open={isDialogOpen} onClose={handleCloseDialog} use={"passwordChange"} userId={userData.id}/> 
     </div>
   )
 }

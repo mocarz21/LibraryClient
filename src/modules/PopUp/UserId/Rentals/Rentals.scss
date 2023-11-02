@@ -1,0 +1,13 @@
+@import '../../../../settings.scss';
+.borrowed-books-module{
+  .icons{
+    width: 5px;
+    text-align: left;
+    .icon{
+      cursor: pointer;
+      color: $btn-color;
+    }
+  }
+  
+  
+}

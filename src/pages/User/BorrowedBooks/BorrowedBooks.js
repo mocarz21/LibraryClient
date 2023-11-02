@@ -29,7 +29,6 @@ export const BorrowedBooks = () => {
     setDialogOpen(true)
 
   }
-
   return(
     <div className="container borrowed-books-module ">
       <div className="row">
