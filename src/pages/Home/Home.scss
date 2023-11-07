@@ -1,5 +1,8 @@
 @import '../../settings.scss';
 .home-module{
+  .search-filters{
+    display: none;
+  }
   background-color: $second-color;
   h1{
     font-family: $font-title;
@@ -9,3 +12,4 @@
     font-family: $font-title;
   }
 }
+

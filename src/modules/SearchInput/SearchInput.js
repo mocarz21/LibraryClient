@@ -3,9 +3,12 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useFilterBooks } from '../../hooks/useFilterBooks' 
 import { useFilterUser } from '../../hooks/useFilterUser'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './SearchInput.scss'
 
 export const SearchInput = ({user,action}) => {
+  
+  const navigate = useNavigate()
 
   const [textSearch, setTextSearch] = useState('')
   const [genre, setGenre] = useState('all');
@@ -17,8 +20,9 @@ export const SearchInput = ({user,action}) => {
   const filteredText = useFilterUser({textSearch})
 
   const sendDataToSearch = () =>{
-   user ? action(filteredText) : action(filteredBooks)
-
+    if(!action){
+      navigate('/search')
+    }else user ? action(filteredText) : action(filteredBooks)
   }
 
   return(
@@ -30,20 +34,26 @@ export const SearchInput = ({user,action}) => {
             <FontAwesomeIcon icon={faMagnifyingGlass} />  
           </button>
         </div>
-        {!user && <div className='search-filters '>
+        {!user && <div className='search-filters'>
           <div className='main-filters row'>
-            <div className='col-7 col-md-3 '>
+            <div className='col-7 col-md-4 '>
               <label htmlFor="genre">Kategoria: </label>
               <select id="genre" name='genre' value={genre} onChange={e => setGenre(e.target.value)}>
                 <option value='all'>Wszystko</option>
-                <option value='fantasy'>Fantastyka</option>
-                <option value="history">Historia</option>
+                <option value='Fantasy'>Fantastyka</option>
+                <option value="Literatura historyczna">Literatura historyczna</option>
+                <option value="Literatura romantyczna">Literatura romantyczna</option>
+                <option value="Literatura dziecięca">Literatura dziecięca</option>
+                <option value="Nowela">Nowela</option>
+                <option value="Literatura młodzieżowa">Literatura młodzieżowa</option>
+                <option value="Literatura polska">Literatura polska</option>
+                <option value="Epika">Epika</option>
               </select>
             </div>
-            <div className='col-5 col-md-1` '>
+            <div className='col-5 col-md-3'>
               <input type="number" id="year" className='year' name="year" placeholder="Rok wydania" value={year} onChange={e => setYear(e.target.value)}/>
             </div>
-            <div className='col-7 col-md-2 '>
+            <div className='col-7 col-md-2 future '>
               <input type='checkbox' id="available" name="available" value={available} onChange={e => setAvailable(e.target.checked) }/>
               <label htmlFor="available">Tylko dostępne</label>
             </div>

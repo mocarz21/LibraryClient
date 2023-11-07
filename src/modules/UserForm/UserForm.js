@@ -174,7 +174,7 @@ export const UserForm = ({newOrEdit}) => {
         </div>}
         {employeeEditMember === true &&<div className='col butons'>
           <button className="btn btn-primary" onClick={funLogOut}>Wyloguj</button>
-          <button className="btn btn-primary" onClick={openPopup}>Zmień hasło</button>
+          { newOrEdit !== 'new' && <button className="btn btn-primary" onClick={openPopup}>Zmień hasło</button>}
         </div>
         }  
       </div>

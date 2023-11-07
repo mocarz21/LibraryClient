@@ -5,13 +5,15 @@ import { useBooks } from '../../../hooks/ApiHooks/useBooks';
 import { useUser } from '../../../hooks/ApiHooks/useUsers';
 import { useRentals } from '../../../hooks/ApiHooks/useRentals'
 import Button from '@mui/material/Button';
+import { useImg } from '../../../hooks/ApiHooks/useImg';
 import  './Book.scss';
 
 export const Book = (props) =>{
 
   const { payload, loading } = useBooks(props.bookId)
   const { userData } = useUser()
-  const { payload: payloadRentals, save, loading: loadingRentals } = useRentals()
+  const {  save, loading: loadingRentals } = useRentals()
+  const { images } = useImg()
 
   const today = new Date();
 
@@ -32,7 +34,7 @@ export const Book = (props) =>{
     }
     save(body)
   }
-
+  console.log('userData',userData)
 
   return(
     <>
@@ -41,7 +43,7 @@ export const Book = (props) =>{
         <div className='container book-module text-center'>
           <div className='row '>
             <div className='col-6 small-screen'>
-              <img src={ `${book.id}.jpg`}/>
+              <img src={ images[book.nazwa_Img]} alt={'Obraz'}/>
             </div>
             <div className='col-sm-6 col-12 align-self-center'>
               <h5><b>Autor:</b></h5> <p>{ book.autor }</p>
@@ -53,7 +55,7 @@ export const Book = (props) =>{
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={rental}>Wypożycz</Button>
+        {userData.cardNumber && <Button onClick={rental}>Wypożycz</Button>}
         <Button onClick={handlExit}>Zamknij</Button>
       </DialogActions>
     </>

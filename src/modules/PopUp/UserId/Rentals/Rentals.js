@@ -14,6 +14,7 @@ export const Rentals = ({userId}) => {
   const { loading: loadingRentals, payload, save, remove, refetch } = useRentals()
   const { loading: loadingBooks, payload: payloadBooks} = useBooks()
   const [refreshFlag, setRefreshFlag] = useState(false);
+  const [showOnlyNotApproved, setShowOnlyNotApproved] = useState(false);
 
   let rentals = ''
   if(payload){
@@ -27,8 +28,6 @@ export const Rentals = ({userId}) => {
     }
     
   },[payload, refreshFlag])
-
-  console.log(rentals)
 
   if(loading || loadingRentals || loadingBooks) return <div>Loading ....</div>
 
@@ -65,10 +64,10 @@ export const Rentals = ({userId}) => {
     <div className="container borrowed-books-module">
       <div className="row">
       <h3>Historia wypożyczeń</h3>
-        <div className="col-4 align-self-center">
+        <div className="col-12 align-self-center">
           <label>
             Pokaż tylko nieoddane:
-            <input type="checkbox" />
+            <input type="checkbox" onChange={() => setShowOnlyNotApproved(!showOnlyNotApproved)} />
           </label>
         </div>
       </div>   
@@ -89,7 +88,9 @@ export const Rentals = ({userId}) => {
           <p>Akcja:</p>
         </div>
       </div>
-      {rentals.map(e => <div className="row heading-info" key={e.id}>
+      {rentals
+        .filter(e => !showOnlyNotApproved || (showOnlyNotApproved && e.return_date === null))
+        .map(e => (<div className="row heading-info" key={e.id}>
         <div className="col-3">
           <p>{whatBookIsThis(e.id_books)}</p>
         </div>
@@ -100,18 +101,18 @@ export const Rentals = ({userId}) => {
           <p>{DateOnly(e.return_date)}</p>
         </div>
         <div className="col-1">
-          <p>{e.approved === '0'? "Z" : e.return_date  ? "O" : "W"}</p>
+          <p>{e.return_date === null && e.approved === '0'? "Z" : e.return_date !== null  ? "O" : "W"}</p>
         </div>
         <div className="col-1 icons">
           <FontAwesomeIcon className='icon' icon={faTrashCan} onClick={()=>removeButton( e.id )}/>
         </div>
         <div className="col-1 icons">
-           {e.approved !== '1' &&<FontAwesomeIcon className="icon" icon={faThumbsUp} onClick={()=> approvedButton( e )} />}
+           {e.approved !== '1' && e.return_date === null && <FontAwesomeIcon className="icon" icon={faThumbsUp} onClick={()=> approvedButton( e )} />}
         </div>
-        {e.approved == '1' && <div className="col-1 icons">
-        <FontAwesomeIcon className="icon"  icon={faRightToBracket} onClick={()=> returnBook( e.id )}/>
+        {e.approved === '1' && <div className="col-1 icons">
+        <FontAwesomeIcon className="icon"  icon={faRightToBracket} onClick={()=> returnBook( e )}/>
         </div>}    
-      </div>)}          
+      </div>))}          
     </div>
   )
 }

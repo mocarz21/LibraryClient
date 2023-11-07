@@ -12,6 +12,7 @@ export const BorrowedBooks = () => {
   const { loading, userData } = useUser()
   const { loading: loadingRentals, payload } = useRentals()
   const { loading: loadingBooks, payload: payloadBooks} = useBooks()
+  const [showOnlyNotApproved, setShowOnlyNotApproved] = useState(false);
   
   if(loading || loadingRentals || loadingBooks) return <div>Loading ....</div>
   
@@ -38,7 +39,7 @@ export const BorrowedBooks = () => {
         <div className="col-4 align-self-center">
           <label>
             Pokaż tylko nieoddane:
-            <input type="checkbox" />
+            <input type="checkbox"  onChange={()=>setShowOnlyNotApproved(!showOnlyNotApproved)}/>
           </label>
         </div>
       </div>   
@@ -60,7 +61,9 @@ export const BorrowedBooks = () => {
             <p>Akcja:</p>
           </div>}
         </div>
-        {rentals.map(e => <div className="row heading-info ">
+        {rentals
+        .filter(e => !showOnlyNotApproved || (showOnlyNotApproved && e.return_date === null))
+        .map(e => (<div className="row heading-info" key={e.id}>
           <div className="col">
             <p>{whatBookIsThis(e.id_books)}</p>
           </div>
@@ -76,7 +79,7 @@ export const BorrowedBooks = () => {
           {!userData.cardNumber && <div className="col-1">
             <button className="btn btn-primary">Usuń</button>
           </div>}  
-        </div>)}
+        </div>))}
       </div>
       <div className="row d-block d-sm-none">
         <div className="row heading-info">
